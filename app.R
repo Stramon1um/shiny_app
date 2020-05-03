@@ -6,7 +6,7 @@ library(scales)
 #library (readr)
 #library(rsconnect)
 
-dat_temp <- read.csv(url("https://raw.githubusercontent.com/Stramon1um/adso_isotherm_models/master/temp.csv"), header = TRUE, sep=";")
+dat_temp <- read.csv(url("https://raw.githubusercontent.com/Stramon1um/shiny_app/master/temp.csv"), header = TRUE, sep=";")
 
 dat_temp_2 <- melt(dat_temp, id.vars = c("data","time"), variable_name = "sensor", measure.vars=c("t1", "t2")) 
 
