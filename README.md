@@ -1,2 +1,3 @@
-# shiny_app
-Shiny app tests
+# Shiny app
+
+My Shiny app for testing some random stuff
