@@ -35,12 +35,13 @@ ui <- fluidPage(
                   label = "Choose a sensor to display",
                   choices = c("Sensor 1", "Sensor 2",
                               "All"),
-                  selected = "All")
+                  selected = "All"),
+      width = 3 #il totale tra side e main è 12
       
     ),
     mainPanel(htmlOutput("min_max"),
-              plotOutput("plot"),
-              textOutput("errore"))
+              plotOutput("plot",height = 800),
+              width = 9)
   )
 )
 
@@ -70,7 +71,8 @@ server <- function(input, output) {
       as.POSIXct(c(as.POSIXct(input$date[1]),as.POSIXct(input$date[2])), format="%d/%m/%y %H:%M:%S", tz="UCT")
     })
     
-    ggplot(data, aes(iso, value, color=sensor))+geom_line()+scale_x_datetime(limits = lims_3(), labels=date_format("%d %b"), breaks="2 day")+scale_color_manual(values=c(color_line))+theme_bw()
+    plot<-ggplot(data, aes(iso, value, color=sensor))+geom_line()+scale_x_datetime(limits = lims_3(), labels=date_format("%d %b"), breaks="2 day")+scale_color_manual(values=c(color_line))
+    plot+theme_bw()
     }) 
   
 }
