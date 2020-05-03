@@ -1,0 +1,13 @@
+name: shiny_app
+title: shiny_app
+username:
+account: stramon1um
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2232752
+bundleId: 3096545
+url: https://stramon1um.shinyapps.io/shiny_app/
+when: 1588504298.2968
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: README.md|temp.csv
