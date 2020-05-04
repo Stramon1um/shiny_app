@@ -3,6 +3,7 @@ library(shiny)
 library(ggplot2)
 library(reshape)
 library(scales)
+library(plotly)
 #library(rsconnect)
 
 dat_temp <- read.csv(url("https://raw.githubusercontent.com/Stramon1um/shiny_app/master/temp_fixed.csv"), header = TRUE, sep=",")
@@ -40,8 +41,7 @@ ui <- fluidPage(
       
     ),
     mainPanel(htmlOutput("min_max"),
-              plotOutput("plot",height = 800),
-              width = 9)
+              plotlyOutput("plot",height = 800), width = 9)
   )
 )
 
@@ -53,7 +53,7 @@ server <- function(input, output) {
           as.character(input$date[1]),"</b>to<b>",as.character(input$date[2]),"</b>")
   })
   
-  output$plot <- renderPlot({
+  output$plot <- renderPlotly({
     
     data <- switch(input$sensor, 
                    "Sensor 1" = subset(dat_temp, sensor=="t1"),
@@ -71,8 +71,9 @@ server <- function(input, output) {
       as.POSIXct(c(as.POSIXct(input$date[1]),as.POSIXct(input$date[2])), format="%d/%m/%y %H:%M:%S", tz="UCT")
     })
     
-    plot<-ggplot(data, aes(iso, value, color=sensor))+geom_line()+scale_x_datetime(limits = lims_3(), labels=date_format("%d %b"), breaks="2 day")+scale_color_manual(values=c(color_line))
-    plot+theme_bw()
+    ggplotly(
+      ggplot(data, aes(iso, value, color=sensor))+geom_line()+scale_x_datetime(limits = lims_3(), labels=date_format("%d-%m"), breaks="2 day")+scale_color_manual(values=c(color_line))+xlab("Day")+ylab("Temperature")+theme_bw()+theme(axis.text = element_text(size = 16), axis.text.x = element_text(angle = 30, hjust = 1), axis.title = element_text(size = 18, face = "bold"), legend.title = element_blank(), legend.text = element_text(size = 16)),
+    tooltip=c("sensor","value"))
     }) 
   
 }
