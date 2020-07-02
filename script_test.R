@@ -48,8 +48,8 @@ ggplot(dat_temp)+
         axis.text.y.left = element_text(color = "blue"),)
 
 ggplot(dat_temp_2, aes(x=iso, y=value, color=source, group=1))+
-  #geom_line(size=1)+
-  geom_point(size=1)+
+  geom_line(size=0.7)+
+  #geom_point(size=1)+
   #geom_line(aes(x=iso, y=pressure, color="pressure"))+
   facet_wrap(~source, nrow = 3, scales = "free_y", strip.position="right")+
   #scale_x_datetime(limits = lims_3(), labels=date_format("%d-%m"), breaks="2 day")
