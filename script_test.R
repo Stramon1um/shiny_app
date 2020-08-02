@@ -52,8 +52,9 @@ ggplot(dat_temp_2, aes(x=iso, y=value, color=source, group=1))+
   #geom_point(size=1)+
   #geom_line(aes(x=iso, y=pressure, color="pressure"))+
   facet_wrap(~source, nrow = 3, scales = "free_y", strip.position="right")+
+  geom_smooth(linetype = "dashed", method = "lm", formula=y ~ poly(x, 2, raw=TRUE), se = FALSE, fill = NA)+
   #scale_x_datetime(limits = lims_3(), labels=date_format("%d-%m"), breaks="2 day")
-  scale_x_datetime(labels=date_format("%d-%m-%y"), breaks="1 days")+
+  scale_x_datetime(labels=date_format("%d-%m-%y"), breaks="2 days")+
   #scale_y_continuous(sec.axis = sec_axis(~.*1.35, name="Humidity"))+
   #scale_color_manual(values=c("red", "blue"))+
   #ylab("Temperature")+
